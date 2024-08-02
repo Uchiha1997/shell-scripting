@@ -1,2 +1,2 @@
-# shell-scripting
-Shell scripts for aspiring DevOps Engineer.
+# Shell scripts I learnt in DevOps Journey.
+Shell scripts I learnt in DevOps Journey.
