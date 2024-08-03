@@ -2,7 +2,7 @@
 Just complete basic shell scripting tutorial from this website
 
 https://www.learnshell.org/en/Arrays
-##Lesson Learned
+## Lesson Learned.
 Special Variables
 
 $0 - The filename of the current script.|
