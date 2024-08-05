@@ -76,3 +76,70 @@ a / b division (integer) (a divided by b)
 a % b modulo (the integer remainder of a divided by b)
 
 a ** b exponentiation (a to the power of b)
+
+## Basic String Operations
+### String Length
+```shell
+#       1234567890123456
+STRING="this is a string"
+echo ${#STRING}            # 16
+```
+### Index
+Find the numerical position in $STRING of any single character in $SUBSTRING that matches. Note that the 'expr' command is used in this case.
+
+```shell
+STRING="this is a string"
+SUBSTRING="hat"
+expr index "$STRING" "$SUBSTRING"     # 1 is the position of the first 't' in $STRING
+```
+### Substring Extraction
+Extract substring of length $LEN from $STRING starting after position $POS. Note that first position is 0.
+
+```shell
+STRING="this is a string"
+POS=1
+LEN=3
+echo ${STRING:$POS:$LEN}   # his
+```
+
+If :$LEN is omitted, extract substring from $POS to end of line
+
+```shell
+STRING="this is a string"
+echo ${STRING:1}           # $STRING contents without leading character
+echo ${STRING:12}          # ring
+```
+### Substring Replacement
+```shell
+STRING="to be or not to be"
+```
+Replace first occurrence of substring with replacement
+```shell
+STRING="to be or not to be"
+echo ${STRING[@]/be/eat}        # to eat or not to be
+```
+Replace all occurrences of substring
+```shell
+STRING="to be or not to be"
+echo ${STRING[@]//be/eat}        # to eat or not to eat
+```
+Delete all occurrences of substring (replace with empty string)
+```shell
+STRING="to be or not to be"
+echo ${STRING[@]// not/}        # to be or to be
+```
+Replace occurrence of substring if at the beginning of $STRING
+```shell
+STRING="to be or not to be"
+echo ${STRING[@]/#to be/eat now}    # eat now or not to be
+```
+Replace occurrence of substring if at the end of $STRING
+```shell
+STRING="to be or not to be"
+echo ${STRING[@]/%be/eat}        # to be or not to eat
+```
+Replace occurrence of substring with shell command output
+```shell
+STRING="to be or not to be"
+echo ${STRING[@]/%be/be on $(date +%Y-%m-%d)}    # to be or not to be on 2012-06-14
+```
