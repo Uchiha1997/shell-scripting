@@ -7,14 +7,14 @@ https://www.learnshell.org/en/Arrays
 Shell variables are created once they are assigned a value. A variable can contain a number, a character or a string of characters. Variable name is case sensitive and can consist of a combination of letters and the underscore "_". Value assignment is done using the "=" sign. Note that no space permitted on either side of = sign when initializing variables.
 
 You can call variable in any new line with $ symbol
-```
+```shell
 Name='Akshay'
 echo $Name
 #output will print Name variable, 
 ```
 Variables can be assigned with the value of a command output. This is referred to as substitution. Substitution can be done by encapsulating the command with `` (known as back-ticks) or with $()
 
-```
+```shell
 FILELIST=`ls`
 FileWithTimeStamp=/tmp/my-dir/file_$(/bin/date +%Y-%m-%d).txt
 ```
@@ -38,18 +38,18 @@ $! - The process number of the last background command.
 
 ## Arrays
 An array can hold several values under one name. Array naming is the same as variables naming. An array is initialized by assign space-delimited values enclosed in ()
-```
+```shell
 my_array=(apple banana "Fruit Basket" orange)
 new_array[2]=apricot # "Fruit Basket" will be replaced with apricot
 new_array[4]=mango # mango will be added as 5th element
 ```
 The total number of elements in the array is referenced by ${#arrayname[@]}
-```
+```shell
 my_array=(apple banana "Fruit Basket" orange)
 echo  ${#my_array[@]}                   # 4
 ```
 The array elements can be accessed with their numeric index. The index of the first element is 0.
-```
+```shell
 my_array=(apple banana "Fruit Basket" orange)
 echo ${my_array[3]}                     # orange - note that curly brackets are needed
 # adding another array element
