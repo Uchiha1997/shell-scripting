@@ -35,3 +35,25 @@ $? - The exit status of the last command executed.
 $$ - The process ID of the current shell. For shell scripts, this is the process ID under which they are executing.
 
 $! - The process number of the last background command.
+
+##Arrays
+An array can hold several values under one name. Array naming is the same as variables naming. An array is initialized by assign space-delimited values enclosed in ()
+```
+my_array=(apple banana "Fruit Basket" orange)
+new_array[2]=apricot # **"Fruit Basket"** will be replaced with **apricot**
+new_array[4]=mango # **mango** will be added as 5th element
+```
+The total number of elements in the array is referenced by ${#arrayname[@]}
+```
+my_array=(apple banana "Fruit Basket" orange)
+echo  ${#my_array[@]}                   # 4
+```
+The array elements can be accessed with their numeric index. The index of the first element is 0.
+```
+my_array=(apple banana "Fruit Basket" orange)
+echo ${my_array[3]}                     # orange - note that curly brackets are needed
+# adding another array element
+my_array[4]="carrot"                    # value assignment without a $ and curly brackets
+echo ${#my_array[@]}                    # 5
+echo ${my_array[${#my_array[@]}-1]}     # carrot
+```
