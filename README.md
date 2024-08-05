@@ -40,8 +40,8 @@ $! - The process number of the last background command.
 An array can hold several values under one name. Array naming is the same as variables naming. An array is initialized by assign space-delimited values enclosed in ()
 ```
 my_array=(apple banana "Fruit Basket" orange)
-new_array[2]=apricot # **"Fruit Basket"** will be replaced with **apricot**
-new_array[4]=mango # **mango** will be added as 5th element
+new_array[2]=apricot # "Fruit Basket" will be replaced with apricot
+new_array[4]=mango # mango will be added as 5th element
 ```
 The total number of elements in the array is referenced by ${#arrayname[@]}
 ```
