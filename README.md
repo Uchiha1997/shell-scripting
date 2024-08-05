@@ -143,3 +143,13 @@ Replace occurrence of substring with shell command output
 STRING="to be or not to be"
 echo ${STRING[@]/%be/be on $(date +%Y-%m-%d)}    # to be or not to be on 2012-06-14
 ```
+## Decision Making (if loop)
+
+The basic conditional decision making construct(syntax) is:
+```shell
+if [ expression ]; then
+
+code if 'expression' is true
+
+fi
+```
