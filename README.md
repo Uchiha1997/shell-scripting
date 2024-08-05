@@ -36,7 +36,7 @@ $$ - The process ID of the current shell. For shell scripts, this is the process
 
 $! - The process number of the last background command.
 
-##Arrays
+## Arrays
 An array can hold several values under one name. Array naming is the same as variables naming. An array is initialized by assign space-delimited values enclosed in ()
 ```
 my_array=(apple banana "Fruit Basket" orange)
