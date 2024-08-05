@@ -2,7 +2,16 @@
 Just complete basic shell scripting tutorial from this website
 
 https://www.learnshell.org/en/Arrays
-## Lesson Learned.
+
+## Variables 
+Shell variables are created once they are assigned a value. A variable can contain a number, a character or a string of characters. Variable name is case sensitive and can consist of a combination of letters and the underscore "_". Value assignment is done using the "=" sign. Note that no space permitted on either side of = sign when initializing variables.
+
+Variables can be assigned with the value of a command output. This is referred to as substitution. Substitution can be done by encapsulating the command with `` (known as back-ticks) or with $()
+
+```
+FILELIST=`ls`
+FileWithTimeStamp=/tmp/my-dir/file_$(/bin/date +%Y-%m-%d).txt
+```
 Special Variables
 
 $0 - The filename of the current script.
