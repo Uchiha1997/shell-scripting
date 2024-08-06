@@ -527,3 +527,11 @@ Consider each part of the code block, separated by a colon:
 3) 10000 : The GID number for this group (10000).
 
 4) user01,user02,user03 : A list of users that are members of this group as a supplementary group.
+
+#### Primary Groups and Supplementary Groups
+
+Every user has exactly one primary group. For local users, this group is listed by GID in the /etc/passwd file. The primary group owns files that the user creates.
+
+When a regular user is created, a group is created with the same name as the user, to be the primary group for the user. The user is the only member of this User Private Group. This group membership design simplifies the management of file permissions, to have user groups separated by default.
+
+Users might also have supplementary groups. Membership in supplementary groups is stored in the /etc/group file.
