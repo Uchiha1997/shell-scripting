@@ -52,8 +52,40 @@ As viewed in the following table, redirecting only stdout does not suppress disp
 
 ![alt text](https://rol.redhat.com/rol/static/static_file_cache/rh124-9.0/edit/combine-append.svg)
 
+## Construct Pipelines
+A pipeline is a sequence of one or more commands that are separated by the vertical bar character (|). A pipeline connects the standard output of the first command to the standard input of the next command.
 
+The following list shows some pipeline examples:
 
+Redirect the output of the ls command to the less command to display it on the terminal one screen at a time.
+```shell
+[user@host ~]$ ls -l /usr/bin | less
+```
+Redirect the output of the ls command to the wc -l command, which counts the number of received lines from ls and prints that value to the terminal.
+```shell
+[user@host ~]$ ls | wc -l
+```
+### Pipelines, Redirection, and Appending to a File
 
+When you combine redirection with a pipeline, the shell sets up the entire pipeline first, and then it redirects the input/output. If you use output redirection in the middle of a pipeline, then the output goes to the file and not to the next command in the pipeline.
+
+![alt text](https://rol.redhat.com/rol/static/static_file_cache/rh124-9.0/edit/pipe-tee.svg)
+
+The tee command overcomes this limitation. In a pipeline, tee copies its standard input to its standard output and also redirects its standard output to the files that are given as arguments to the command. If you imagine data as water that flows through a pipeline, then you can visualize tee as a "T" joint in the pipe that directs output in two directions
+
+#### Pipeline Examples with the tee Command
+
+The next example redirects the output of the ls command to the /tmp/saved-output file and passes it to the less command, so it is displayed on the terminal one screen at a time.
+```shell
+[user@host ~]$ ls -l | tee /tmp/saved-output | less
+```
+If you use the tee command at the end of a pipeline, then the terminal shows the output of the commands in the pipeline and saves it to a file at the same time.
+```shell
+[user@host ~]$ ls -t | head -n 10 | tee /tmp/ten-last-changed-files
+```
+Use the tee command -a option to append the content to a file instead of overwriting it.
+```shell
+[user@host ~]$ ls -l | tee -a /tmp/append-files
+```
 
 
