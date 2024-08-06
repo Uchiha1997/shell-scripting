@@ -24,7 +24,7 @@ As viewed in the following table, redirecting only stdout does not suppress disp
 
 #### Table 5.2. Output Redirection Operators
 
->file this command Redirect stdout to overwrite a file.
+##### >file this command Redirect stdout to overwrite a file.
 
 ![alt text](https://rol.redhat.com/rol/static/static_file_cache/rh124-9.0/edit/redirection-overview.svg)
 
