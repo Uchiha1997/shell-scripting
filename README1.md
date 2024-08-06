@@ -16,4 +16,16 @@ If a program opens separate connections to other files, then it might use higher
 | 2             | stderr        |Content Cell  | Terminal           |Write only           |
 | 3+            | filename      |Content Cell  | None               |Read, write, or both |
 
+### Redirect Output to a File
+
+If you redirect stdout to a file and the file does not exist, then the file is created. If the file does exist and the redirection does not append to the file, then the redirection overwrites the file's contents. To discard the output of a process, you can redirect to the empty /dev/null special file that discards channel output that is redirected to it.
+
+As viewed in the following table, redirecting only stdout does not suppress displaying stderr error messages on the terminal.
+
+#### Table 5.2. Output Redirection Operators
+
+>file this command Redirect stdout to overwrite a file.
+
+![alt text](https://rol.redhat.com/rol/static/static_file_cache/rh124-9.0/edit/redirection-overview.svg)
+
 
