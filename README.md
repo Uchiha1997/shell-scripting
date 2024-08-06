@@ -1,4 +1,4 @@
-# Shell scripts I learnt in DevOps Journey.
+# Basics of Shell Scripting.
 Just complete basic shell scripting tutorial from this website
 
 https://www.learnshell.org/en/Arrays
