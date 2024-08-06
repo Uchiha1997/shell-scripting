@@ -368,31 +368,31 @@ As viewed in the following table, redirecting only stdout does not suppress disp
 
 #### Table 5.2. Output Redirection Operators
 
-##### 1) >file this command Redirect stdout to overwrite a file.
+1) >file this command Redirect stdout to overwrite a file.
 
 ![alt text](https://rol.redhat.com/rol/static/static_file_cache/rh124-9.0/edit/redirection-overview.svg)
 
-##### 2) >>file this command Redirect stdout to append to a file.
+2) >>file this command Redirect stdout to append to a file.
 
 ![alt text](https://rol.redhat.com/rol/static/static_file_cache/rh124-9.0/edit/redirection-append.svg)
 
-##### 3) 2>file this command Redirect stderr to overwrite a file.
+3) 2>file this command Redirect stderr to overwrite a file.
 
 ![alt text](https://rol.redhat.com/rol/static/static_file_cache/rh124-9.0/edit/redirection-error.svg)
 
-##### 4) >file this command Redirect stdout to overwrite a file.
+4) >file this command Redirect stdout to overwrite a file.
 
 ![alt text](https://rol.redhat.com/rol/static/static_file_cache/rh124-9.0/edit/redirection-overview.svg)
 
-##### 5) 2> /dev/null this command Redirect stdout to overwrite a file.
+5) 2> /dev/null this command Redirect stdout to overwrite a file.
 
 ![alt text](https://rol.redhat.com/rol/static/static_file_cache/rh124-9.0/edit/combine-overwrite.svg)
 
-##### 6) > file 2>&1 this command Redirect stdout and stderr to overwrite the same file.
+6) > file 2>&1 this command Redirect stdout and stderr to overwrite the same file.
 
 ![alt text](https://rol.redhat.com/rol/static/static_file_cache/rh124-9.0/edit/combine-overwrite.svg)
 
-##### 7) >> file 2>&1 this command Redirect stdout and stderr to append to the same file.
+7) >> file 2>&1 this command Redirect stdout and stderr to append to the same file.
 
 ![alt text](https://rol.redhat.com/rol/static/static_file_cache/rh124-9.0/edit/combine-append.svg)
 
@@ -431,9 +431,9 @@ Use the tee command -a option to append the content to a file instead of overwri
 ```shell
 [user@host ~]$ ls -l | tee -a /tmp/append-files
 ```
-# Manage Local Users and Groups
+## Manage Local Users and Groups
 
-#### What is User?
+### What is User?
 
 User accounts are fundamental to system security. Every process (running program) on the system runs as a particular user. Every file has a particular user as its owner. With file ownership, the system enforces access control for users of the files. The user that is associated with a running process determines the files and directories that are accessible to that process.
 
@@ -509,7 +509,7 @@ Consider each part of the code block, separated by a colon:
 
 7) /bin/bash : The default shell program for this user that runs at login. Some accounts use the /﻿sbin/nologin shell to disallow interactive logins with that account.
 
-#### What Is a Group?
+### What Is a Group?
 A group is a collection of users that need to share access to files and other system resources. Groups can grant access to files to a set of users instead of to a single user.
 
 Each line in the /etc/group file contains information about one group. Each group entry is divided into four colon-separated fields. An example of a line from /etc/group follows:
@@ -528,10 +528,59 @@ Consider each part of the code block, separated by a colon:
 
 4) user01,user02,user03 : A list of users that are members of this group as a supplementary group.
 
-#### Primary Groups and Supplementary Groups
+### Primary Groups and Supplementary Groups
 
 Every user has exactly one primary group. For local users, this group is listed by GID in the /etc/passwd file. The primary group owns files that the user creates.
 
 When a regular user is created, a group is created with the same name as the user, to be the primary group for the user. The user is the only member of this User Private Group. This group membership design simplifies the management of file permissions, to have user groups separated by default.
 
 Users might also have supplementary groups. Membership in supplementary groups is stored in the /etc/group file.
+
+## Manage Local User Accounts
+### Create Users from the Command Line
+The useradd username command creates a user called username. 
+At this point, a valid password is not set for the account, and the user cannot log in until a password is set.
+
+### Set Passwords from the Command Line
+The passwd username command sets the initial password or changes the existing password for the username user. 
+The root user can set a password to any value. 
+The terminal displays a message if the password does not meet the minimum recommended criteria, 
+but then you can retype the new password and the passwd command updates it successfully.
+```shell
+[root@host ~]# passwd user01
+Changing password for user user01.
+New password: redhat
+BAD PASSWORD: The password is shorter than 8 characters
+Retype new password: redhat
+passwd: all authentication tokens updated successfully.
+[root@host ~]#
+```
+A regular user must choose a password at least eight characters long. Do not use a dictionary word, the username, or the previous password.
+
+### Delete Users from the Command Line
+
+The userdel username command removes the username user from /etc/passwd,but leaves the user's home directory intact. 
+The userdel -r username command removes the user from /etc/passwd and deletes the user's home directory.
+
+### WARNING
+When you remove a user without specifying the userdel -r option, an unassigned UID now owns the user's files. If you create a user and that user is assigned the deleted user's UID, then the new account owns those files, which is a security risk. Typically, organization security policies disallow deleting user accounts, and instead lock them from being used, to avoid this scenario.
+
+The following example demonstrates how this scenario can lead to information leakage:
+```shell
+[root@host ~]# useradd user01
+[root@host ~]# ls -l /home
+drwx------. 3 user01  user01    74 Mar  4 15:22 user01
+[root@host ~]# userdel user01
+[root@host ~]# ls -l /home
+drwx------. 3    1000    1000   74 Mar  4 15:22 user01
+[root@host ~]# useradd -u 1000 user02
+[root@host ~]# ls -l /home
+drwx------. 3 user02     user02       74 Mar  4 15:23 user02
+drwx------. 3 user02     user02       74 Mar  4 15:22 user01
+```
+Notice that user02 now owns all files that user01 previously owned. The root user can use the find / -nouser -o -nogroup command to find all unowned files and directories.
+
+### Modify Existing Users from the Command Line
+
+The usermod --help command displays the options to modify an account.
+
