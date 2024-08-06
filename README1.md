@@ -24,8 +24,36 @@ As viewed in the following table, redirecting only stdout does not suppress disp
 
 #### Table 5.2. Output Redirection Operators
 
-##### >file this command Redirect stdout to overwrite a file.
+##### 1) >file this command Redirect stdout to overwrite a file.
 
 ![alt text](https://rol.redhat.com/rol/static/static_file_cache/rh124-9.0/edit/redirection-overview.svg)
+
+##### 2) >>file this command Redirect stdout to append to a file.
+
+![alt text](https://rol.redhat.com/rol/static/static_file_cache/rh124-9.0/edit/redirection-append.svg)
+
+##### 3) 2>file this command Redirect stderr to overwrite a file.
+
+![alt text](https://rol.redhat.com/rol/static/static_file_cache/rh124-9.0/edit/redirection-error.svg)
+
+##### 4) >file this command Redirect stdout to overwrite a file.
+
+![alt text](https://rol.redhat.com/rol/static/static_file_cache/rh124-9.0/edit/redirection-overview.svg)
+
+##### 5) 2> /dev/null this command Redirect stdout to overwrite a file.
+
+![alt text](https://rol.redhat.com/rol/static/static_file_cache/rh124-9.0/edit/combine-overwrite.svg)
+
+##### 6) > file 2>&1 this command Redirect stdout and stderr to overwrite the same file.
+
+![alt text](https://rol.redhat.com/rol/static/static_file_cache/rh124-9.0/edit/combine-overwrite.svg)
+
+##### 7) >> file 2>&1 this command Redirect stdout and stderr to append to the same file.
+
+![alt text](https://rol.redhat.com/rol/static/static_file_cache/rh124-9.0/edit/combine-append.svg)
+
+
+
+
 
 
