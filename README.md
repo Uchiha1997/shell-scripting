@@ -431,5 +431,99 @@ Use the tee command -a option to append the content to a file instead of overwri
 ```shell
 [user@host ~]$ ls -l | tee -a /tmp/append-files
 ```
+# Manage Local Users and Groups
 
+#### What is User?
 
+User accounts are fundamental to system security. Every process (running program) on the system runs as a particular user. Every file has a particular user as its owner. With file ownership, the system enforces access control for users of the files. The user that is associated with a running process determines the files and directories that are accessible to that process.
+
+User accounts are of the following main types: the superuser, system users, and regular users.
+
+##### The superuser account administers the system. The superuser name is root and the account has a UID of 0. The superuser has full system access.
+
+##### The system user accounts are used by processes that provide supporting services. These processes, or daemons, usually do not need to run as the superuser. They are assigned non-privileged accounts to secure their files and other resources from each other and from regular users on the system. Users do not interactively log in with a system user account.
+
+##### Most users have regular user accounts for their day-to-day work. Like system users, regular users have limited access to the system.
+
+Use the id command to show information about the currently logged-in user:
+```shell
+[user01@host ~]$ id
+uid=1000(user01) gid=1000(user01) groups=1000(user01) context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023
+```
+Use the id command to show information about the currently logged-in user:
+```shell
+[user01@host ~]$ id
+uid=1000(user01) gid=1000(user01) groups=1000(user01) context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023
+```
+To view information about another user, pass the username to the id command as an argument:
+```shell
+[user01@host ~]$ id user02
+uid=1002(user02) gid=1001(user02) groups=1001(user02) context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023
+```
+Use the ls -l command to view the owner of a file. 
+```shell
+[user01@host ~]$ ls -l mytextfile.txt
+-rw-rw-r--. 1 user01 user01 0 Feb  5 11:10 mytextfile.txt
+```
+Use the ls -ld command to view the owner of a directory.
+```shell
+[user01@host]$ ls -ld Documents
+drwxrwxr-x. 2 user01 user01 6 Feb  5 11:10 Documents
+```
+Use the ps command to view process information.
+Use the ps command -a option to view all processes with a terminal. 
+Use the ps command -u option to view the user that is associated with a process.
+In the following output, the first column shows the username.
+
+```shell
+[user01@host ~]$ ps -au
+USER     PID %CPU %MEM    VSZ   RSS TTY    STAT START  TIME COMMAND
+root    1690  0.0  0.0 220984  1052 ttyS0  Ss+  22:43  0:00 /sbin/agetty -o -p -- \u --keep-baud 1
+user01  1769  0.0  0.1 377700  6844 tty2   Ssl+ 22:45  0:00 /usr/libexec/gdm-x-session --register-
+user01  1773  1.3  1.3 528948 78356 tty2   Sl+  22:45  0:03 /usr/libexec/Xorg vt2 -displayfd 3 -au
+user01  1800  0.0  0.3 521412 19824 tty2   Sl+  22:45  0:00 /usr/libexec/gnome-session-binary
+user01  3072  0.0  0.0 224152  5756 pts/1  Ss   22:48  0:00 -bash
+user01  3122  0.0  0.0 225556  3652 pts/1  R+   22:49  0:00 ps -au
+```
+Each line in the /etc/passwd file contains information about one user. The file is divided into seven colon-separated fields. An example of a line from /etc/passwd follows:
+
+```shell
+[user01@host ~]$ cat /etc/passwd
+...output omitted...
+user01:x:1000:1000:User One:/home/user01:/bin/bash
+```
+
+Consider each part of the code block, separated by a colon:
+
+1) user01 : The username for this user.
+
+2) x : The user's encrypted password was historically stored here; it is now a placeholder.
+
+3) 1000 : The UID number for this user account.
+
+4) 1000 : The GID number for this user account's primary group. Groups are discussed later in this section.
+
+5) User One : A brief comment, description, or the real name for this user.
+
+6) /home/user01 : The user's home directory, and the initial working directory when the login shell starts.
+
+7) /bin/bash : The default shell program for this user that runs at login. Some accounts use the /﻿sbin/nologin shell to disallow interactive logins with that account.
+
+#### What Is a Group?
+A group is a collection of users that need to share access to files and other system resources. Groups can grant access to files to a set of users instead of to a single user.
+
+Each line in the /etc/group file contains information about one group. Each group entry is divided into four colon-separated fields. An example of a line from /etc/group follows:
+```shell
+[user01@host ~]$ cat /etc/group
+...output omitted...
+group01:x:10000:user01,user02,user03
+```
+Consider each part of the code block, separated by a colon:
+
+1) group01 : Name for this group.
+
+2) x : Obsolete group password field; it is now a placeholder.
+
+3) 10000 : The GID number for this group (10000).
+
+4) user01,user02,user03 : A list of users that are members of this group as a supplementary group.
