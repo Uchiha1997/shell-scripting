@@ -439,11 +439,11 @@ User accounts are fundamental to system security. Every process (running program
 
 User accounts are of the following main types: the superuser, system users, and regular users.
 
-##### The superuser account administers the system. The superuser name is root and the account has a UID of 0. The superuser has full system access.
+1) The superuser account administers the system. The superuser name is root and the account has a UID of 0. The superuser has full system access.
 
-##### The system user accounts are used by processes that provide supporting services. These processes, or daemons, usually do not need to run as the superuser. They are assigned non-privileged accounts to secure their files and other resources from each other and from regular users on the system. Users do not interactively log in with a system user account.
+2) The system user accounts are used by processes that provide supporting services. These processes, or daemons, usually do not need to run as the superuser. They are assigned non-privileged accounts to secure their files and other resources from each other and from regular users on the system. Users do not interactively log in with a system user account.
 
-##### Most users have regular user accounts for their day-to-day work. Like system users, regular users have limited access to the system.
+3) Most users have regular user accounts for their day-to-day work. Like system users, regular users have limited access to the system.
 
 Use the id command to show information about the currently logged-in user:
 ```shell
