@@ -584,3 +584,21 @@ Notice that user02 now owns all files that user01 previously owned. The root use
 
 The usermod --help command displays the options to modify an account.
 
+|usermod options:  | Usage                                                                                        |
+|------------------|----------------------------------------------------------------------------------------------|
+|-a, --append	     | Use it with the -G option to add the supplementary groups to the user's current              |
+|                  | set of group memberships instead of replacing the set of supplementary groups with a new set.|
+|-c, --comment     | Add the COMMENT text to the comment field.                                                   |
+| COMMENT          |                                                                                              |
+|-d, --home        | Specify a home directory for the user account.                                               |
+| HOME_DIR	       |                                                                                              |
+|-g, --gid         | Specify the primary group for the user account.                                              |
+| GROUP   	       |                                                                                              |
+|-G, --groups      | Specify a comma-separated list of supplementary groups for the user account.                 |
+| GROUPS	         |                                                                                              |
+|-L, --lock        | Lock the user account                                                                        |
+|-m, --move-home   | Move the user's home directory to a new location. You must use it with the -d option.  	    |                                                          |-s, --shell       | Specify a particular login shell for the user account.                                       | 
+| SHELL            |                                                                                              | 
+|-U, --unlock      | Unlock the user account.                                                                     | 
+|-m, --move-home   | Move the user's home directory to a new location. You must use it with the -d option.  	    | 
+
